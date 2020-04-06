@@ -11,7 +11,7 @@ class Ingredients extends Component {
       input: "",
     };
   }
-
+//mount and subscribe
   componentDidMount() {
     store.subscribe(() => {
       const reduxState = store.getState();
@@ -20,13 +20,14 @@ class Ingredients extends Component {
       });
     });
   }
-
+//change handler
   handleChange(val) {
     this.setState({
       input: val,
     });
   }
   addIngredient() {
+
     store.dispatch({
       type: ADD_INGREDIENTS,
       payload: this.state.input,
