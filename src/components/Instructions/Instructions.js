@@ -11,7 +11,7 @@ class Instructions extends Component {
       input: "",
     };
   }
-
+  //store subscribe
   componentDidMount() {
     store.subscribe(() => {
       const reduxState = store.getState();
