@@ -21,6 +21,7 @@ export const DELETE_RECIPE = "DELETE_RECIPE";
 
 function reducer(state = initialState, action) {
   const { type, payload } = action;
+
   switch (type) {
     case UPDATE_RECIPE:
       return {
