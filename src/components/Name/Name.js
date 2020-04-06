@@ -1,28 +1,31 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Name.css";
+import { UPDATE_NAME, UPDATE_CATEGORY } from "../../store";
+import store from "../../store";
 
 class Name extends Component {
   constructor(props) {
     super(props);
+    const reduxState = store.getState();
     this.state = {
-      name: '',
-      category: ''
+      name: reduxState.name,
+      category: reduxState.category,
     };
   }
   handleNameChange(nameVal) {
     this.setState({
-      name: nameVal
+      name: nameVal,
     });
   }
-
   handleCategoryChange(catVal) {
     this.setState({
-      category: catVal
+      category: catVal,
     });
   }
   saveChanges() {
-    // Send data to Redux state
+    store.dispatch({ type: UPDATE_NAME, payload: this.state.name });
+    store.dispatch({ type: UPDATE_CATEGORY, payload: this.state.category });
   }
   render() {
     return (
@@ -31,14 +34,14 @@ class Name extends Component {
           <h2>Recipe Name:</h2>
           <input
             value={this.state.name}
-            onChange={e => this.handleNameChange(e.target.value)}
+            onChange={(e) => this.handleNameChange(e.target.value)}
           />
         </div>
         <div className="input_container">
           <h2>Category:</h2>
           <select
             value={this.state.category}
-            onChange={e => this.handleCategoryChange(e.target.value)}
+            onChange={(e) => this.handleCategoryChange(e.target.value)}
           >
             <option value={""}>----</option>
             <option value={"Breakfast"}>Breakfast</option>
