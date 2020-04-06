@@ -1,7 +1,6 @@
 import React, { Component } from "react";
+import store, { ADD_INGREDIENTS } from "./../../store";
 import { Link } from "react-router-dom";
-import { ADD_INGREDIENT, RESET_INPUT } from "../../store";
-import store from "../../store";
 
 class Ingredients extends Component {
   constructor(props) {
@@ -12,12 +11,16 @@ class Ingredients extends Component {
       input: "",
     };
   }
+
   componentDidMount() {
     store.subscribe(() => {
       const reduxState = store.getState();
-      this.setState({ ingredients: reduxState.ingredients });
+      this.setState({
+        ingredients: reduxState.ingredients,
+      });
     });
   }
+
   handleChange(val) {
     this.setState({
       input: val,
@@ -25,7 +28,7 @@ class Ingredients extends Component {
   }
   addIngredient() {
     store.dispatch({
-      type: ADD_INGREDIENT,
+      type: ADD_INGREDIENTS,
       payload: this.state.input,
     });
     this.setState({
